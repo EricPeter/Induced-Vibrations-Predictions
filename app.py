@@ -59,8 +59,6 @@ colors = [
     "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
 
 
-
-
 @app.route('/upload',methods=['GET','POST'])
 def upload():
     if request.method=='POST':
