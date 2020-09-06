@@ -16,7 +16,10 @@ from os import environ
 from sqlalchemy import MetaData
 from sqlalchemy.orm import mapper
 from sqlalchemy import create_engine,inspect
-
+import tensorflow as tf
+from keras.models import model_from_json
+from keras.models import load_model
+import numpy as np
 mod = Blueprint('users',__name__)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '^%huYtFd90;90jjj'
@@ -113,8 +116,37 @@ def tables():
     return render_template('tables.html',df=list(df.values.tolist()),column_names=columns,zip=zip)
 
 @app.route('/predict')
-def predict():
-    return render_template('register.html')
 
+def predict():
+    
+    return render_template('register.html')
+@app.route('/submit_args',methods=["POST","GET"])
+def submit_args():
+    input_=[]
+    if request.method=="POST":
+        bench = request.form["Bench"]
+        input_.append(float(bench))
+        h_diameter=request.form['h_diameter']
+        input_.append(float(h_diameter))
+        burden=request.form['burden']
+        input_.append(float(burden))
+        spacing=request.form['spacing']
+        input_.append(float(spacing))
+        Charge=request.form['Charge']
+        input_.append(float(Charge))
+        subdrill=request.form['subdrill']
+        input_.append(float(subdrill))
+        stemm=request.form['stemm']
+        input_.append(float(stemm))
+        pf=request.form['pf']
+        input_.append(float(pf))
+        delay=request.form['delay']
+        input_.append(float(delay))
+        ucs=request.form['ucs']
+        input_.append(float(ucs))
+        value_=np.array([input_])
+        loaded_model=load_model('vibration.hdf5')
+        result=loaded_model.predict(value_)
+        return render_template('result.html',result=result)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
