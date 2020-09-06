@@ -53,6 +53,13 @@ class dataset(Base):
     vibrations= Column(Integer)
 
 
+colors = [
+    "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+    "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
+    "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
+
+
+
 
 @app.route('/upload',methods=['GET','POST'])
 def upload():
@@ -81,10 +88,22 @@ def index():
     columns = df.columns
     colmns = len(columns)
     return render_template('index.html',number_of_rows=number_of_rows,colmns=colmns)
-
 @app.route('/charts')
 def charts():
-    return  render_template('charts.html')
+    df = pd.read_sql('SELECT * FROM dataset', engine)
+    index = df.index
+    number_of_rows = len(index)
+    columns = df.columns.values
+    sum_column = df.sum(axis=0)
+    labels = columns
+    values = sum_column.values
+    bar_labels = labels
+    bar_values = values
+    line_labels = labels
+    line_values = values
+    pie_labels = labels
+    pie_values = values
+    return  render_template('charts.html',title='Dataset Distribution', max=10000, labels=bar_labels, values=bar_values,labels_=line_labels, values_=line_values,set=zip(pie_values,pie_labels, colors))
 
 @app.route('/tables')
 def tables():
