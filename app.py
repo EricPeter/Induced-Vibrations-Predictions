@@ -21,7 +21,7 @@ from keras.models import model_from_json
 from keras.models import load_model
 import numpy as np
 
-mod = Blueprint('users',__name__)
+# mod = Blueprint('users',__name__)
 
 app = Flask(__name__)
 
