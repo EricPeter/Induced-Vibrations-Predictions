@@ -154,4 +154,4 @@ def submit_args():
 def description():
     return  render_template('ann_file.html')
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
