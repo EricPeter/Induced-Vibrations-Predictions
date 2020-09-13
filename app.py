@@ -25,9 +25,11 @@ mod = Blueprint('users',__name__)
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '^%huYtFd90;90jjj'
 app.config['UPLOADED_FILES'] = 'static'
 engine = create_engine('sqlite:///test.db',echo=True)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = '^%huYtFd90;90jjj'
+autoflush=True
 Session = sessionmaker(bind=engine)
 session = Session()
 Base=declarative_base()
@@ -157,4 +159,6 @@ def submit_args():
 def description():
     return  render_template('ann_file.html')
 if __name__ == '__main__':
-    app.run()
+    db.create_all()
+    app.secret_key = "123"
+    app.run(debug=True)
