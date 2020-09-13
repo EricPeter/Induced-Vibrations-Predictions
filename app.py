@@ -1,6 +1,5 @@
 from flask import Flask,render_template,redirect,request,flash,url_for,Blueprint
 import pandas as pd
-import numpy as np
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 import  os
@@ -9,7 +8,6 @@ from io import TextIOWrapper
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Float, Date, String, VARCHAR
-from flask_paginate import Pagination,get_page_parameter
 import csv
 from flask_bootstrap import Bootstrap
 from os import environ
