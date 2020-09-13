@@ -73,9 +73,11 @@ def upload():
             if ext == 'xlsx':
                 data =pd.read_excel(csv)
                 data.to_sql(con=engine, index_label='id', name=dataset.__tablename__, if_exists='replace')
+                return redirect(url_for('index'))
             elif ext == 'csv':
                 data = pd.read_csv(csv)
                 data.to_sql(con=engine, index_label='id', name=dataset.__tablename__, if_exists='replace')
+                return redirect(url_for('index'))
             else:
                 print("Unknown file format")
         except:
@@ -148,5 +150,8 @@ def submit_args():
         loaded_model=load_model('vibration.hdf5')
         result=loaded_model.predict(value_)
         return render_template('result.html',result=result)
+@app.route('/description')
+def description():
+    return  render_template('ann_file.html')
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

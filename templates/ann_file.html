@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %}Sharon -Predictions{% endblock %}</h1>
+{% endblock %}
+{% block content %}
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="p-5">
+              <div class="text-left">
+                <h1 class="h4 text-gray-900 mb-4">Dataset</h1>
+                  <div>
+                      <p>Rock samples from to the quarry where taken to the lab to test for the point load index of the rock.Drilling and blasting parameters used at SICL
+                        to determine the drilling and blasting parameters that have a direct impact on the amount of ground vibrations produced during blasting.<br>
+                      The following where the parameters considered
+                      <ul>
+                      <li>Bench height:This distance will be measured and recorded using a tape measure.</li>
+                      <li>Blast hole diameter:This will be measured and recorded at the blasting site from the drilled blast holes.</li>
+                      <li>Spacing:This is the distance between two adjacent blast holes and will be determined by measurement using a tape at the drilled site</li>
+                      <li>Sub-drilling, J:The sub-drilling is the extra depth drilled below the grade level.</li>
+                      <li>Charge length:This is the explosive column in the blast hole and will be determined in the field during blasting activities.</li>
+                      <li>Stemming length:This is the length of the blast hole that is filled with inert material between the explosives and the collar of the blast hole.</li>
+                      <li>Powder factor:his is the ratio of the amount of explosives required to break a given quantity of rock.</li>
+                      <li>Delay timing:This is time lag between blasting one row to another. This value will be determined from the explosive being used during blasting..</li>
+                  </ul>
+                      </p>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+          <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="p-5">
+              <div class="text-left">
+                <h1 class="h4 text-gray-900 mb-4">Artificial Neural Network</h1>
+                  <div><img src="{{url_for('static',filename='img/looo.png')}}" width="800" height="300"></div>
+                  <div class="text-left">
+                      <p>An Artificial Neural Network model was created.It was created with 4 layers.The first layer had 25 neurons,10 inputs and an activation function called "relu" regularization function.
+                      The second layer had 16 neurons,and a regulation activation function.A third layer had 8 neurons and a linear activation function and the last layer had one neuron for the output.During the compilation of the model mean square error loss  was considered,adam optimiser and mse as a metric.</p>
+                      <p>The dataset was divided into two sets,training and testing datasets.The dataset size was 140 and 28 rows where used as a test set randomly.A kerasRegressor was running on top of a baseline neural Network model to increase its accuracy.This model was trained with 30 epochs and a batchsize of 5.Below the results where discussed</p>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+              <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="p-5">
+              <div class="text-left">
+                <h1 class="h4 text-gray-900 mb-4">Results</h1>
+                  <div>
+                      <img src="{{url_for('static',filename='img/train.png')}}" width="800" height="300">
+                  </div>
+                  <div>
+                      <p class="text-left">Above is a training and Validation loss graph.It shows the variation between loss and epochs,as epochs increased ,loss declined.Below are the mean error,standard deviation ,minimum error and maximum error of the model during the training session</p>
+                        <div class="card-body text-left">
+                        <h4 class="small font-weight-bold">mean_error <span class="float-right">0.9074538473044124</span></h4>
+
+                        <h4 class="small font-weight-bold">(standard deviation) std_error<span class="float-right">0.5572373926593295</span></h4>
+
+                        <h4 class="small font-weight-bold">min_error<span class="float-right">0.3401974177360534</span></h4>
+
+                        <h4 class="small font-weight-bold">max_error <span class="float-right">3.172155728340149</span></h4>
+
+                    </div>
+                      <p class="text-left">Below is graph showing the performance of the model depending on the actual values and predicted values</p>
+                      <img src="{{url_for('static',filename='img/prediction.png')}}" width="800" height="300">
+                      <p class="text-sm-left">Due to the limited size of the dataset the model was not able to
+                          learn properly especially on values beyond 1 and above.The was evaluated  with a r2 score metrics and the predictions r2 score was approximatley 0.0047 and the for the training dataset was 0.0157</p>
+                      <p class="text-left">A model was frozen as a .hdf5(vibrations.hdf5) file and  deployed into a web application for use and testing.</p>
+                  </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
