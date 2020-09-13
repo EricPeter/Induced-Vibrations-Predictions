@@ -20,8 +20,11 @@ import tensorflow as tf
 from keras.models import model_from_json
 from keras.models import load_model
 import numpy as np
+
 mod = Blueprint('users',__name__)
+
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = '^%huYtFd90;90jjj'
 app.config['UPLOADED_FILES'] = 'static'
 engine = create_engine('sqlite:///test.db',echo=True)
